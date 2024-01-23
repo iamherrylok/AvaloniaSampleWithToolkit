@@ -1,6 +1,16 @@
-﻿namespace BasicMvvmSample.ViewModels;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 
-public class MainWindowViewModel : ViewModelBase
+namespace BasicMvvmSample.ViewModels;
+
+public partial class MainWindowViewModel : ObservableObject
 {
-    public string Greeting => "Welcome to Avalonia!";
+    [ObservableProperty] 
+    [NotifyPropertyChangedFor(nameof(Greeting))]
+    private string? _name;
+
+    public string? Greeting 
+        =>
+        string.IsNullOrEmpty(Name) 
+            ? "Hello World from Avalonia.Samples" 
+            : $"Hello {Name}";
 }
